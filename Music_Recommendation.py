@@ -11,7 +11,7 @@ params = [{
         'learning_rate': 0.2,
         'verbose': 0,
         'num_leaves': 2 ** 7,
-        'bagging_fraction': 0.97,
+        'bagging_fraction': 0.95,
         'bagging_freq': 1,
         'bagging_seed': 1,
         'feature_fraction': 0.9,
@@ -26,7 +26,7 @@ params = [{
         'learning_rate': 0.2,
         'verbose': 0,
         'num_leaves': 2 ** 7,
-        'bagging_fraction': 0.97,
+        'bagging_fraction': 0.95,
         'bagging_freq': 1,
         'bagging_seed': 1,
         'feature_fraction': 0.9,
@@ -97,6 +97,22 @@ def _Source_Tab(csv):
             adding.append(0)
 
     csv['specific_tab'] = adding
+
+    return csv
+
+
+
+
+def _Source_Type(csv):
+    a = csv['source_type']
+    adding = []
+    for idx, val in enumerate(a):
+        if (val == 'local-library') or (val == 'local-playlist'):
+            adding.append(1)
+        else:
+            adding.append(0)
+
+    csv['specific_type'] = adding
 
     return csv
 
