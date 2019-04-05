@@ -91,16 +91,32 @@ def _Source_Tab(csv):
     a = csv['source_system_tab']
     adding = []
     for idx, val in enumerate(a):
-        if (val == 'my library') or (val == 'search'):
+        if (val == 'my library') or (val == 'settings'):
             adding.append(1)
-        else:
+        elif (val == 'listen with') or (val == 'radio'):
             adding.append(0)
+        else:
+            adding.append(0.5)
 
     csv['specific_tab'] = adding
 
     return csv
 
 
+def _Source_Screen(csv):
+    a = csv['source_screen_name']
+    adding = []
+    for idx, val in enumerate(a):
+        if (val == 'Local playlist') or (val == 'My library'):
+            adding.append(1)
+        elif (val == 'Discover Genre') or (val == 'Others profile more') or (val == 'Radio'):
+            adding.append(0)
+        else:
+            adding.append(0.5)
+
+    csv['specific_screen'] = adding
+
+    return csv
 
 
 def _Source_Type(csv):
@@ -109,8 +125,10 @@ def _Source_Type(csv):
     for idx, val in enumerate(a):
         if (val == 'local-library') or (val == 'local-playlist'):
             adding.append(1)
-        else:
+        elif (val == 'listen-with') or (val == 'radio'):
             adding.append(0)
+        else:
+            adding.append(0.5)
 
     csv['specific_type'] = adding
 
@@ -121,6 +139,8 @@ def _Add_Feature(csv):
     new_csv = _Song_Counting(csv)
     new_csv = _Artist_Counting(new_csv)
     new_csv = _Source_Tab(new_csv)
+    new_csv = _Source_Screen(new_csv)
+    new_csv = _Source_Type(new_csv)
 
     print(new_csv)
 
